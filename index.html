@@ -7,68 +7,16 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<style>
-			html,
-			body {
-				height: 100%;
-			}
-			body {
-				margin: 0;
-				padding: 0;
-			}
-			.buttons {
-				position: absolute;
-				right: 0;
-				bottom: 0;
-				padding: 10px;
-			}
-
-			canvas.webgl {
-				position: fixed;
-				left: 0;
-				right: 0;
-				top: 0;
-				height: 100vh;
-			}
-
-			.title {
-				position: fixed;
-				top: 50%;
-				left: 5%;
-				transform: translateY(-50%);
-				z-index: 3;
-				font-size: 50px;
-				color: #fff;
-				text-transform: uppercase;
-			}
-
-			#wrap section {
-				position: relative;
-				z-index: 2;
-				height: 500vh;
-			}
-
-			section p {
-				position: absolute;
-				right: 5%;
-				top: 50vh;
-				z-index: 2;
-			}
-
-			p.name {
-				font-size: 50px;
-				color: #fff;
-			}
-
-			p.date {
-				font-size: 20px;
-				color: #fff;
-			}
-		</style>
+		<link rel="stylesheet" href="./css/style.css" />
 	</head>
 
 	<body>
-		<p class="title">Zodiac</p>
+		<div class="title">
+			<p>
+				Zodiac <br />
+				<span class="sub-title">by.Linda Lee</span>
+			</p>
+		</div>
 		<div id="wrap">
 			<section>
 				<p class="name">Aqaurius</p>
@@ -220,6 +168,8 @@
 				particleGroup.add(particleInnerGroup);
 
 				let positionAttributes = null;
+				let mouseX = 0,
+					mouseY = 0;
 
 				const scene = new THREE.Scene();
 
@@ -669,6 +619,7 @@
 					particleInnerGroup.add(mesh);
 
 					// interaction
+
 					(function () {
 						let mouseSphere, followMouseSphere;
 						if (window._DEBUG) {
@@ -688,6 +639,11 @@
 						let pointerTween, pointerScaleTween;
 						document.documentElement.addEventListener("mousemove", (e) => {
 							const worldPosition = getWorldPositionFromScreenPosition(e.clientX, e.clientY);
+
+							// if (e.isPrimary === false) return;
+							// mouseX = e.clientX - areaWidth / 2;
+							// mouseY = e.clientY - areaHeight / 2;
+
 							// dotMaterial.uniforms.u_pointer.value.copy(worldPosition);
 							// mouseSphere && mouseSphere.position.copy(dotMaterial.uniforms.u_pointer.value);
 							pointerTween && pointerTween.kill();
@@ -812,6 +768,11 @@
 
 				function render() {
 					renderer.render(scene, camera);
+
+					// camera.position.x += (mouseX - camera.position.x) * 0.005;
+					// camera.position.y += (-mouseY - camera.position.y) * 0.005;
+
+					// camera.lookAt(scene.position);
 				}
 			})();
 		</script>
