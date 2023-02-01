@@ -102,3 +102,14 @@ p.date {
 	font-size: 20px;
 	color: #fff;
 }
+
+@media (max-width: 800px) {
+	.title {
+		top: 0;
+		transform: translateY(0);
+	}
+
+	section p {
+		top: 80vh;
+	}
+}
